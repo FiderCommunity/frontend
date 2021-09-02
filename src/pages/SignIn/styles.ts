@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
-import signInBackground from '../../assets/sign-in-background.png';
+import signInBackground from '../../assets/sign-in-background.jpg';
 
 export const Container = styled.div`
   height: 100vh;
@@ -62,7 +62,7 @@ export const AnimationContainer = styled.div`
 
   /* Estiliza apenas os a's que vem diretamente após a tag content */
   > a {
-    color: #ff9000;
+    color: #ec4444;
     display: block;
     text-decoration: none;
 
@@ -77,7 +77,7 @@ export const AnimationContainer = styled.div`
     }
 
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#ec4444')};
     }
   }
 `;

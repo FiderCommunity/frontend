@@ -57,10 +57,10 @@ export const SignIn: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logo} alt="Logo GoBarber" />
+          <img src={logo} alt="Logo FiderCommunity" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1> Faça seu logon</h1>
+            <h1> Please login </h1>
 
             <Input name="email" icon={FiMail} placeholder="Email" />
             <Input
@@ -69,13 +69,13 @@ export const SignIn: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">Enter</Button>
 
-            <a href="forgot">Esqueci minha senha</a>
+            {/* <a href="forgot" style={{ color: '#312e38' }}>Forgot my password</a> */}
           </Form>
           <Link to="/signup">
             <FiLogIn />
-            Criar conta
+            Create account
           </Link>
         </AnimationContainer>
       </Content>

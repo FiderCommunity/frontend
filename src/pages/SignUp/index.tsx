@@ -39,7 +39,7 @@ const SignUp: React.FC = () => {
         addToast({
           type: 'success',
           title: 'Cadastro realizado!',
-          description: 'Você já pode fazer seu logon no GoBarber',
+          description: 'Você já pode fazer seu logon no FiderCommunity',
         });
       } catch (err) {
         if (err instanceof ValidationError) {
@@ -64,24 +64,24 @@ const SignUp: React.FC = () => {
 
       <Content>
         <AnimationContainer>
-          <img src={logo} alt="Logo GoBarber" />
+          <img src={logo} alt="Logo FiderCommunity" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1> Faça seu Cadastro </h1>
+            <h1> Sign up here </h1>
 
-            <Input name="name" icon={FiUser} placeholder="Nome" />
-            <Input name="email" icon={FiMail} placeholder="Email" />
+            <Input name="name" icon={FiUser} placeholder="Name" />
+            <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder="Password"
             />
-            <Button type="submit">Cadastrar</Button>
+            <Button type="submit">Sign Up</Button>
           </Form>
           <Link to="/">
             <FiArrowLeft />
-            Voltar
+            Back
           </Link>
         </AnimationContainer>
       </Content>

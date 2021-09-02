@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
-import signUpBackground from '../../assets/sign-up-background.png';
+import signUpBackground from '../../assets/sign-up-background.jpg';
 
 export const Container = styled.div`
   height: 100vh;
@@ -62,7 +62,7 @@ export const AnimationContainer = styled.div`
 
   /* Estiliza apenas os a's que vem diretamente após a tag content */
   > a {
-    color: #f4ede8;
+    color: #312e38;
     display: block;
     font-size: 14px;
     text-decoration: none;
@@ -78,7 +78,7 @@ export const AnimationContainer = styled.div`
     }
 
     &:hover {
-      color: ${shade(0.2, '#f4ede8')};
+      color: ${shade(0.2, '#312e38')};
     }
   }
 `;

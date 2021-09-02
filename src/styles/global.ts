@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #312E38;
-    color: #FFF;
+    background: #e5e5e5;
+    color: #312E38;
     -webkit-font-smooting: antialiased;
   }
 
@@ -32,7 +32,7 @@ export default createGlobalStyle`
   /* Change Autofill inputs color */
   @-webkit-keyframes autofill {
       0%,100% {
-          color: #f4ede8;
+          color: #312e38;
           background: transparent;
       }
   }
