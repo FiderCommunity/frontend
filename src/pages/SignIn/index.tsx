@@ -34,7 +34,7 @@ export const SignIn: React.FC = () => {
 
         addToast({
           type: 'success',
-          title: 'Autentição feita com sucesso',
+          title: 'Authenticated with Success',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -45,8 +45,8 @@ export const SignIn: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: err.response.data.message,
+          title: 'Error on Authentication',
+          description: (err as any).response.data.error,
         });
       }
     },
@@ -60,7 +60,7 @@ export const SignIn: React.FC = () => {
           <img src={logo} alt="Logo FiderCommunity" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1> Please login </h1>
+            <h1> Login </h1>
 
             <Input name="email" icon={FiMail} placeholder="Email" />
             <Input

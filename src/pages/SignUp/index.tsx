@@ -34,24 +34,25 @@ const SignUp: React.FC = () => {
         await signUpSchema.validate(data, { abortEarly: false });
 
         await api.post('/users', data);
-        history.push('/');
+        history.push('/login');
 
         addToast({
           type: 'success',
-          title: 'Cadastro realizado!',
-          description: 'Você já pode fazer seu logon no FiderCommunity',
+          title: 'Registrated with success!',
+          description: 'You can login on FiderCommunity',
         });
       } catch (err) {
+        
         if (err instanceof ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
           return;
         }
-
+        
         addToast({
           type: 'error',
-          title: 'Erro no cadastro',
-          description: err.response.data.message,
+          title: 'Error on registration',
+          description: (err as any).response.data.error,
         });
       }
     },
@@ -67,7 +68,7 @@ const SignUp: React.FC = () => {
           <img src={logo} alt="Logo FiderCommunity" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1> Sign up here </h1>
+            <h1> Sign up </h1>
 
             <Input name="name" icon={FiUser} placeholder="Name" />
             <Input name="email" icon={FiMail} placeholder="E-mail" />
@@ -77,7 +78,7 @@ const SignUp: React.FC = () => {
               type="password"
               placeholder="Password"
             />
-            <Button type="submit">Sign Up</Button>
+            <Button type="submit">Enter</Button>
           </Form>
           <Link to="/">
             <FiArrowLeft />

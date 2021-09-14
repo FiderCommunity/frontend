@@ -23,6 +23,7 @@ const Route: React.FC<RouteProps> = ({
   return (
     <ReactDOMRoute
       {...rest}
+
       // Sobrescreve como será a reenderização da rota. E para a verificação há quatro casos:
       // 1. Deslogado (!user) e  Rota aberta (!isPrivate)
       // 2. Deslogado (!user) e Rota privada (isPrivate)
