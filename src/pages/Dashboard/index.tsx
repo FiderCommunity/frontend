@@ -1,24 +1,24 @@
 import React from 'react';
-import { FiLogIn, FiSettings } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 
-export const SignIn: React.FC = () => {
+export const Dashboard: React.FC = () => {
+  const headerInfos = [
+    {
+      "link": "/logout",
+      "name": "Log Out"
+    },
+    {
+      "link": "/settings",
+      "name": "Settings"
+    }
+  ]
+  
   return (
     <>
-        <Link to="/settings">
-            <FiSettings />
-            settings
-        </Link>
-        <br></br>
-        <br></br>
-        <br></br>
-        <Link to="/login">
-            <FiLogIn />
-            Login
-        </Link>
+      <Header headerInfos={headerInfos} ></Header>
     </>
   );
 };
 
-export default SignIn;
+export default Dashboard;
