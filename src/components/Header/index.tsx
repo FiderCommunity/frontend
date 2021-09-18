@@ -13,8 +13,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ headerInfos })  => {
-  console.log(headerInfos)
-
   return(
     <Container>
       <Link to="/"> <LeftOptions> Fider Community </LeftOptions> </Link>
