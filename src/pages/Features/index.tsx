@@ -10,7 +10,7 @@ interface Post {
     url: string,
 }
 
-export const Dashboard: React.FC = () => {
+export const Features: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   
   const headerInfos = [
@@ -30,19 +30,10 @@ export const Dashboard: React.FC = () => {
       <Header headerInfos={headerInfos} ></Header>
 
       <Container>
-        <ul>
-          {posts.map(post => {
-            return  <Card key={post.id}>
-                      <a href={post.url}>
-                        <Image src={post.logo_url} alt="Community Image" ></Image>
-                        <Name>{post.name}</Name>
-                      </a>
-                    </Card>
-          })}
-        </ul>
+       <h1>Features</h1>
       </Container>
     </>
   );
 };
 
-export default Dashboard;
+export default Features;

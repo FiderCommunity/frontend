@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Container, RightOptions, LeftOptions } from './styles';
+import { useAuth } from '../../hooks/auth';
+import { useLocation } from 'react-router-dom'
+import { Container, RightOptions, LeftOptions, RightLink } from './styles';
+
 
 
 interface HeaderInfo {
@@ -13,13 +16,36 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ headerInfos })  => {
+  const { signOut, user } = useAuth();
+  const locationPathName = useLocation().pathname;
+
+  console.log(user)
+  console.log(locationPathName)
+  console.log(!user && locationPathName === '/features')
+
   return(
     <Container>
       <Link to="/"> <LeftOptions> Fider Community </LeftOptions> </Link>
 
-      {headerInfos.map(headerInfo => {
-        return <Link to={headerInfo.link}> <RightOptions> {headerInfo.name} </RightOptions> </Link>
-      })}
+      { // Login e Logout
+        user ?
+        <RightLink href="/" onClick={() => signOut()}>Logout</RightLink> : 
+        <RightLink href="/login">Login</RightLink>
+      }
+      
+      
+      { // Caso Logado
+        user && locationPathName === '/dashboard' ? (<><RightLink href="/settings"> Settings </RightLink> <RightLink href="/features"> Features </RightLink></>) :
+        user && locationPathName === '/features' ? (<><RightLink href="/settings"> Settings </RightLink> <RightLink href="/dashboard"> Dashboard </RightLink></>) :
+        user && locationPathName === '/settings' ? (<><RightLink href="/features"> Features </RightLink> <RightLink href="/dashboard"> Dashboard </RightLink></>) : null
+      }
+
+      { // Features
+        !user && locationPathName === '/requests' ?
+        <RightLink href="/dashboard"> Dashboard </RightLink> :
+        !user ? <RightLink href="/requests"> Features </RightLink> : null
+      }
+
     </Container>
   )
 }

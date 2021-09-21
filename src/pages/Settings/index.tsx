@@ -19,6 +19,7 @@ export const Settings: React.FC = () => {
   return (
     <>
       <Header headerInfos={headerInfos} ></Header>
+      <h1>Settings</h1>
     </>
   );
 };
