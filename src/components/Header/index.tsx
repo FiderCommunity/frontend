@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth';
 import { useLocation } from 'react-router-dom'
-import { Container, RightOptions, LeftOptions, RightLink } from './styles';
+import { Container, LeftOptions, RightLink } from './styles';
 
 
 
@@ -11,17 +11,9 @@ interface HeaderInfo {
   name: string;
 }
 
-interface HeaderProps {
-  headerInfos: HeaderInfo[];
-}
-
-const Header: React.FC<HeaderProps> = ({ headerInfos })  => {
+const Header: React.FC = ()  => {
   const { signOut, user } = useAuth();
   const locationPathName = useLocation().pathname;
-
-  console.log(user)
-  console.log(locationPathName)
-  console.log(!user && locationPathName === '/features')
 
   return(
     <Container>
