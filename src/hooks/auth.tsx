@@ -15,6 +15,7 @@ interface AuthContextData {
   user: Record<string, unknown>;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  token: string;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -53,7 +54,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: authData.user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user: authData.user, signIn, signOut, token: authData.token }}>
       {children}
     </AuthContext.Provider>
   );
