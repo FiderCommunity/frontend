@@ -37,13 +37,10 @@ const SignUp: React.FC = () => {
 
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
+
   const { user, token } = useAuth();
+  const headers = {'Authorization':`token ${token}`}
 
-
-  useEffect(()=> {
-    api.get("projects")
-      .then(res => setProjects(res.data));
-}, []);
   
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -53,7 +50,6 @@ const SignUp: React.FC = () => {
         await createProjectSchema.validate(data, { abortEarly: false });
         data.user_id = user.id as string;
         
-        const headers = {'Authorization':`token ${token}`}
         await api.post('/projects', data, {headers});
 
         addToast({
@@ -76,13 +72,33 @@ const SignUp: React.FC = () => {
         });
       }
     },
-    [addToast, token, user],
+    [addToast, user, headers],
   );
 
-  const deleteItem = (id) => {
-    console.log("deletando " + id)
-  }
+  const deleteItem = useCallback( 
+    async (id: string) => {
+      api.delete("projects", { params: { id }, headers })
+      .then(() => {
+        addToast({
+          type: 'success',
+          title: 'Project Deleted!'
+        });
+      })
+      .catch(e => {
+        addToast({
+          type: 'success',
+          title: 'Error on deleting project.',
+          description: e
+        });
+      });
+    },
+    [addToast, headers]
+  );
 
+  useEffect(()=> {
+    api.get("projects")
+      .then(res => setProjects(res.data));
+  }, [deleteItem, handleSubmit]);
 
   return (
     <>
