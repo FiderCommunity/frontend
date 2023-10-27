@@ -19,24 +19,6 @@ export const LeftOptions = styled.div`
   color: #312e38;
 `;
 
-
-export const RightOptions = styled.div`
-  float: right;
-  
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-  // text-decoration: none;
-  color: #312e38;
-
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: ${shade(0.05, '#e5e5e5')};
-  }
-`;
-
 export const RightLink = styled.a`
   float: right;
   

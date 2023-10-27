@@ -5,20 +5,9 @@ import Header from '../../components/Header';
 
 
 export const Settings: React.FC = () => {
-  const headerInfos = [
-    {
-      "link": "/logout",
-      "name": "Log Out"
-    },
-    {
-      "link": "/dasboard",
-      "name": "Dashboard"
-    }
-  ]
-
   return (
     <>
-      <Header headerInfos={headerInfos} ></Header>
+      <Header></Header>
       <h1>Settings</h1>
     </>
   );
