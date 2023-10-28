@@ -5,12 +5,6 @@ import { useLocation } from 'react-router-dom'
 import { Container, LeftOptions, RightLink } from './styles';
 
 
-
-interface HeaderInfo {
-  link: string;
-  name: string;
-}
-
 const Header: React.FC = ()  => {
   const { signOut, user } = useAuth();
   const locationPathName = useLocation().pathname;
