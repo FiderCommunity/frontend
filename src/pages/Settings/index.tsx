@@ -1,14 +1,16 @@
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import api from '../../services/api';
+import { FiTrash2 } from 'react-icons/fi';
 import getValidationErrors from '../../utils/getValidationErrors';
+
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import { createProjectSchema, ValidationError } from './dataSchema';
-import { Container, InputList } from './styles';
+import { Container, InputList, ProjectsList, CardContainer, Card, Name } from './styles';
 
 
 import Input from '../../components/Input';
@@ -23,10 +25,21 @@ interface SignUpFormData {
   user_id: string;
 }
 
+interface Project {
+  id: string,
+  name: string,
+  logo_url: string,
+  url: string,
+}
+
 const SignUp: React.FC = () => {
+  const [projects, setProjects] = useState<Array<Project>>([]);
+
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
+
   const { user, token } = useAuth();
+  const headers = {'Authorization':`token ${token}`}
 
   
   const handleSubmit = useCallback(
@@ -37,7 +50,6 @@ const SignUp: React.FC = () => {
         await createProjectSchema.validate(data, { abortEarly: false });
         data.user_id = user.id as string;
         
-        const headers = {'Authorization':`token ${token}`}
         await api.post('/projects', data, {headers});
 
         addToast({
@@ -60,34 +72,66 @@ const SignUp: React.FC = () => {
         });
       }
     },
-    [addToast, token, user],
+    [addToast, user, headers],
   );
+
+  const deleteItem = useCallback( 
+    async (id: string) => {
+      api.delete("projects", { params: { id }, headers })
+      .then(() => {
+        addToast({
+          type: 'success',
+          title: 'Project Deleted!'
+        });
+      })
+      .catch(e => {
+        addToast({
+          type: 'success',
+          title: 'Error on deleting project.',
+          description: e
+        });
+      });
+    },
+    [addToast, headers]
+  );
+
+  useEffect(()=> {
+    api.get("projects")
+      .then(res => setProjects(res.data));
+  }, [deleteItem, handleSubmit]);
 
   return (
     <>
       <Header></Header>
         <Container>
+          <ProjectsList>
+            <h1> Projects List </h1>
+            <br></br><br></br>
+            <CardContainer>
+              {projects.map(project => {
+                return  <Card key={project.id}>
+                            <Name>{project.name}</Name>
+                            <button name='delete' onClick={() => deleteItem(project.id)}> 
+                              <FiTrash2 size={20} color={'red'} />
+                            </button>
+                        </Card>
+              })}
+            </CardContainer>
+
+          </ProjectsList>
+
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1> Add Project </h1>
             <br></br><br></br>
 
-            {/* <InputList>
-              <Input type="text" placeholder="Project Name"></Input>
-              <Input type="text" placeholder="Project URL"></Input>
-              <Input type="text" placeholder="Logo URL"></Input>
-              <Input type="text" placeholder="Description"></Input>
-            </InputList> */}
+            
             <InputList>
               <Input name="name"  placeholder="Project Name" />
               <Input name="url" placeholder="Project URL" />
               <Input name="logo_url" placeholder="Logo URL" />
               <Input name="description" placeholder="Description" />
-              {/* <Input type="text" placeholder="Project Name"></Input>
-              <Input type="text" placeholder="Project URLProject URL"></Input>
-              <Input type="text" placeholder="Logo URL"></Input>
-              <Input type="text" placeholder="Description"></Input> */}
+              <Button type="submit">Submit</Button>
             </InputList>
-            <Button type="submit">Submit</Button>
           </Form>
         </Container>
     </>
